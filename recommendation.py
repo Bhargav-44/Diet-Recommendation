@@ -1,5 +1,4 @@
 import pickle
-import streamlit as st
 import pandas as pd 
 
 
@@ -11,6 +10,8 @@ from sklearn.preprocessing import MinMaxScaler
 with open('diet.pkl', 'rb') as file:
     model_data = pickle.load(file)
 
+# knn_model = model_data['model']
+# scaler = model_data['scaler']
 food = model_data['food_data']
 
 k = 10
