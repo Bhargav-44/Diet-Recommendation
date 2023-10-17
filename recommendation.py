@@ -2,12 +2,23 @@ import pickle
 import streamlit as st
 import pandas as pd 
 
+
+from sklearn.neighbors import NearestNeighbors
+from sklearn.preprocessing import MinMaxScaler
+
+
+
 with open('diet.pkl', 'rb') as file:
     model_data = pickle.load(file)
 
-knn_model = model_data['model']
-scaler = model_data['scaler']
 food = model_data['food_data']
+
+k = 10
+knn_model = NearestNeighbors(n_neighbors=k, metric='euclidean')
+knn_model.fit(food[['carbohydrates']])
+
+scaler = MinMaxScaler()
+scaler.fit(food[['carbohydrates', 'protein', 'fats']])
 
 def recommend(user_carbohydrates, user_protein, user_fat):    
 
